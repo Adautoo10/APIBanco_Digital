@@ -2,6 +2,25 @@
 
 namespace ApiBanco_Digital\Controller;
 
-use ApiBanco_Digital\Model\ChavePixModel;
+class ChavePixController extends Controller
+{
+    public static function save()
+    {
 
-use Exception;
+    }
+
+    public static function select()
+    {
+
+    }
+
+    public static function update()
+    {
+
+    }
+
+    public static function delete()
+    {
+        
+    }
+}
