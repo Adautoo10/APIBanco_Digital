@@ -21,8 +21,17 @@ class CorrentistaModel extends Model
         $this->rows = (new CorrentistaDAO())->select();
     }
 
-    public function delete()
+    public function delete(int $id)
     {
-        (new CorrentistaDAO())->delete($this->id);
+        $dao = new CorrentistaDAO();
+
+        $dao->delete($id);
+    }
+
+    public function getById(int $id)
+    {
+        $dao = new CorrentistaDAO();
+
+        $this->rows = $dao->selectById($id);
     }
 }

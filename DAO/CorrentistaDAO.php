@@ -4,6 +4,8 @@ namespace ApiBanco_Digital\DAO;
 
 use ApiBanco_Digital\Model\CorrentistaModel;
 
+use \PDO;
+
 class CorrentistaDAO extends DAO
 {
     public function __construct()
@@ -46,6 +48,18 @@ class CorrentistaDAO extends DAO
         $stmt->bindValue(5, $m->id);
         
         return $stmt->execute();
+    }
+
+    public function selectById(int $id)
+    {
+        $sql = "SELECT * FROM correntista WHERE id = ?";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(1, $id);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
 
     public function delete(int $id) : bool
