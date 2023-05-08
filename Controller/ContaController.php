@@ -23,4 +23,19 @@ class ContaController extends Controller
     {
         
     }
+
+    public static function Extrato()
+    {
+        
+    }
+
+    public static function Enviar()
+    {
+
+    }
+
+    public static function Receber()
+    {
+
+    }
 }
