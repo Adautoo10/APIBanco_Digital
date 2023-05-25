@@ -4,71 +4,60 @@ namespace ApiBanco_Digital\DAO;
 
 use ApiBanco_Digital\Model\CorrentistaModel;
 
-use \PDO;
+use PDO;
 
 class CorrentistaDAO extends DAO
 {
+ 
     public function __construct()
     {
-        parent::__construct();   
-    }
-
-    public function select()
-    {
-        $sql = "SELECT * FROM correntista";
-
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(DAO::FETCH_CLASS);
-    }
-
-    public function insert(CorrentistaModel $m) : bool
-    {
-        $sql = "INSERT INTO correntista (nome, cpf, data_nasc, senha) VALUES (?, ?, ?, ?)";
-
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->bindValue(1, $m->nome);
-        $stmt->bindValue(2, $m->cpf);
-        $stmt->bindValue(3, $m->data_nasc);
-        $stmt->bindValue(4, $m->senha);
-
-        return $stmt->execute();
-    }
-
-    public function update(CorrentistaModel $m)
-    {
-        $sql = "UPDATE correntista SET nome=?, cpf=?, data_nasc=? WHERE id=?";
-
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->bindValue(1, $m->nome);
-        $stmt->bindValue(2, $m->cpf);
-        $stmt->bindValue(3, $m->data_nasc);
-        $stmt->bindValue(4, $m->senha);
-        $stmt->bindValue(5, $m->id);
         
-        return $stmt->execute();
+        parent::__construct();       
     }
 
-    public function selectById(int $id)
+    public function save(CorrentistaModel $m) : CorrentistaModel
     {
-        $sql = "SELECT * FROM correntista WHERE id = ?";
+        return ($m->id == null) ? $this->insert($m) : $this->update($m);
+    }
+
+
+    private function insert(CorrentistaModel $model)
+    {
+       
+        $sql = "INSERT INTO correntista
+                            (nome, email, cpf, data_nascimento, senha) 
+                VALUES 
+                            (?, ?, ?, ?, sha1(?) ) ";
 
         $stmt = $this->conexao->prepare($sql);
-        $stmt->bindValue(1, $id);
 
+        $stmt->bindValue(1, $model->nome);
+        $stmt->bindValue(2, $model->email);
+        $stmt->bindValue(3, $model->cpf);
+        $stmt->bindValue(4, $model->data_nascimento);
+        $stmt->bindValue(5, $model->senha);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_CLASS);
+        $model->id = $this->conexao->lastInsertId();
+
+        return $model;
     }
 
-    public function delete(int $id) : bool
+    private function update(CorrentistaModel $m)  {
+
+    }
+
+    public function selectByCpfAndSenha($cpf, $senha) : CorrentistaModel
     {
-        $sql = "DELETE FROM correntista WHERE id = ?";
+        $sql = "SELECT * FROM correntista WHERE cpf = ? AND senha = sha1(?) ";
 
         $stmt = $this->conexao->prepare($sql);
-        $stmt->bindValue(1, $id);
+        $stmt->bindValue(1, $cpf);
+        $stmt->bindValue(2, $senha);
+        $stmt->execute();
 
-        return $stmt->execute();
+        return $stmt->fetchObject("ApiBanco_Digital\Model\CorrentistaModel"); 
     }
+
+
 }
