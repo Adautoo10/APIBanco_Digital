@@ -4,34 +4,19 @@ namespace ApiBanco_Digital\Model;
 
 use ApiBanco_Digital\DAO\CorrentistaDAO;
 
+
 class CorrentistaModel extends Model
 {
-    public $id, $nome, $cpf, $data_nasc, $senha;
+  
+    public $id, $nome, $email, $cpf, $data_nascimento, $senha;
 
-    public function save()
+    public function save() : ?CorrentistaModel
     {
-        if ($this->id == null)
-            (new CorrentistaDAO())->insert($this);
-        else
-            (new CorrentistaDAO())->update($this);
+        return (new CorrentistaDAO())->save($this);     
     }
 
-    public function getAllRows()
-    {
-        $this->rows = (new CorrentistaDAO())->select();
-    }
-
-    public function delete(int $id)
-    {
-        $dao = new CorrentistaDAO();
-
-        $dao->delete($id);
-    }
-
-    public function getById(int $id)
-    {
-        $dao = new CorrentistaDAO();
-
-        $this->rows = $dao->selectById($id);
+    public function getByCpfAndSenha($cpf, $senha) : CorrentistaModel
+    {      
+        return (new CorrentistaDAO())->selectByCpfAndSenha($cpf, $senha);
     }
 }
