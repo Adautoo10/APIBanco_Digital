@@ -2,40 +2,26 @@
 
 namespace ApiBanco_Digital\Controller;
 
+use ApiBanco_Digital\Model\ContaModel;
+
 class ContaController extends Controller
 {
-    public static function save()
+    public static function abrir()
     {
 
     }
 
-    public static function select()
-    {
-
-    }
-
-    public static function update()
-    {
-
-    }
-
-    public static function delete()
+    public static function fechar()
     {
         
     }
 
-    public static function Extrato()
+    public static function extrato()
     {
         
     }
-
-    public static function Enviar()
-    {
-
-    }
-
-    public static function Receber()
-    {
-
+    public static function index()
+    {      
+     
     }
 }
