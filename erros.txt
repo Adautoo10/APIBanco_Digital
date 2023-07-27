@@ -1,7 +1,7 @@
-#0 C:\Users\Usuario\Desktop\APIBanco_Digital\DAO\CorrentistaDAO.php(39): PDOStatement->execute()
-#1 C:\Users\Usuario\Desktop\APIBanco_Digital\DAO\CorrentistaDAO.php(20): ApiBanco_Digital\DAO\CorrentistaDAO->insert(Object(ApiBanco_Digital\Model\CorrentistaModel))
-#2 C:\Users\Usuario\Desktop\APIBanco_Digital\Model\CorrentistaModel.php(15): ApiBanco_Digital\DAO\CorrentistaDAO->save(Object(ApiBanco_Digital\Model\CorrentistaModel))
-#3 C:\Users\Usuario\Desktop\APIBanco_Digital\Controller\CorrentistaController.php(44): ApiBanco_Digital\Model\CorrentistaModel->save()
-#4 C:\Users\Usuario\Desktop\APIBanco_Digital\Rotas.php(26): ApiBanco_Digital\Controller\CorrentistaController::salvar()
+#0 C:\Users\Usuario\Desktop\APIBanco_Digital\DAO\DAO.php(25): PDO->__construct('mysql:host=loca...', 'root', 'etecjau', Array)
+#1 C:\Users\Usuario\Desktop\APIBanco_Digital\DAO\CorrentistaDAO.php(15): ApiBanco_Digital\DAO\DAO->__construct()
+#2 C:\Users\Usuario\Desktop\APIBanco_Digital\Model\CorrentistaModel.php(20): ApiBanco_Digital\DAO\CorrentistaDAO->__construct()
+#3 C:\Users\Usuario\Desktop\APIBanco_Digital\Controller\CorrentistaController.php(20): ApiBanco_Digital\Model\CorrentistaModel->getByCpfAndSenha('54645645645', 'dfbgbf')
+#4 C:\Users\Usuario\Desktop\APIBanco_Digital\Rotas.php(30): ApiBanco_Digital\Controller\CorrentistaController::login()
 #5 C:\Users\Usuario\Desktop\APIBanco_Digital\Index.php(6): include('C:\\Users\\Usuari...')
 #6 {main}
